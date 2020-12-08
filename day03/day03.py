@@ -35,6 +35,7 @@ def hash_count_on_slope(data, repeat_len, right_slope, down_slope):
 
     for row in data:
         times_called_skip_row += 1
+        # skip row if we arn't on the slope we want
         if down_slope > 1 and skip_row(times_called_skip_row, down_slope):
             continue
             
@@ -42,6 +43,7 @@ def hash_count_on_slope(data, repeat_len, right_slope, down_slope):
 
         if row[iterator] == "#":
             count += 1
+        # move the iterate to the right the distance of the run but loop at the lenght of the row
         iterator = (iterator + right_slope) % repeat_len
 
     
