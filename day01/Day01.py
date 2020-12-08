@@ -1,7 +1,7 @@
 """ OPEN 
     Open our text file and save it into a list of strings
 """
-def openFile() :
+def open_file() :
     my_file = open('data.txt', 'r')
     data = my_file.read().split("\n")
     # print(data)
@@ -13,7 +13,7 @@ def openFile() :
     find our numbers that equal our sum and then return the 
     product
 """
-def productOfTwoSum(data, sum):
+def product_of_two_sum(data, sum):
     product = -1
     for num_1 in data:
         for num_2 in data:
@@ -24,7 +24,7 @@ def productOfTwoSum(data, sum):
 
 """ RETURN PRODUCT OF 3 NUMBERS THAT EQUAL OUR SUM
 """
-def productOfThreeSum(data, sum):
+def product_of_three_sum(data, sum):
     product = -1
     for num_1 in data:
         for num_2 in data:
@@ -39,9 +39,9 @@ def productOfThreeSum(data, sum):
     call our function with the data and the goal sum
 """
 def main():
-    data = openFile()
-    print("product of 2 sums:", productOfTwoSum(data, 2020))
-    print("product of 3 sums:", productOfThreeSum(data, 2020))
+    data = open_file()
+    print("product of 2 sums:", product_of_two_sum(data, 2020))
+    print("product of 3 sums:", product_of_three_sum(data, 2020))
 
 
 if __name__ == "__main__":
