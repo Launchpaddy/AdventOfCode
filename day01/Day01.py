@@ -2,7 +2,7 @@
     Open our text file and save it into a list of strings
 """
 def openFile() :
-    my_file = open("Day01Data.txt", "r")
+    my_file = open("day01data.txt", "r")
     data = my_file.read().split("\n")
     # print(data)
     my_file.close()
@@ -13,7 +13,7 @@ def openFile() :
     find our numbers that equal our sum and then return the 
     product
 """
-def productOfSum(data, sum):
+def productOfTwoSum(data, sum):
     product = -1
     for num_1 in data:
         for num_2 in data:
@@ -28,8 +28,8 @@ def productOfSum(data, sum):
 """
 def main():
     data = openFile()
-    answer = productOfSum(data, 2020)
-    print(answer)
+    answer = productOfTwoSum(data, 2020)
+    print("product of 2 sums:"+ answer)
 
 
 if __name__ == "__main__":
