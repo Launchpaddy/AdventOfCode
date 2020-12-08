@@ -4,7 +4,6 @@
 def open_file() :
     my_file = open('data.txt', 'r')
     data = my_file.read().split("\n")
-    # print(data)
     my_file.close()
     return data
 
