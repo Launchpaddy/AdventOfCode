@@ -5,7 +5,6 @@ def make_list_of_dictionaries(data):
     
     for passport in data:
         attributes = passport.split()
-        # print(attributes)
         dictionary = {}
         for att in attributes:
             key, value = att.split(":")
