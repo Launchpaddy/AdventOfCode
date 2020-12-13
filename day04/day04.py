@@ -5,7 +5,6 @@ def make_list_of_dictionaries(data):
     
     for passport in data:
         attributes = passport.split()
-        # print(attributes)
         dictionary = {}
         for att in attributes:
             key, value = att.split(":")
@@ -86,13 +85,14 @@ def passport_validator(passport):
     if check_passport_id(passport["pid"]):
         valid += 1
 
-    print(valid)
+    # print(valid)
     return valid == 7 # only true if all are valid 
 
 
-def count_legit_passports(list_of_dictionaries):
+def count_legit_passports(list_of_dictionaries, strict=None):
     count = 0
-    # print(len(list_of_dictionaries))
+    
+    print(strict)
     for passport in list_of_dictionaries:
         # print(len(passport))
         # print(passport)
@@ -104,14 +104,17 @@ def count_legit_passports(list_of_dictionaries):
             if "cid" in passport.keys():
                 continue
             else:
-                # TODO check each credentials validity 
-                if passport_validator(passport):
+                if strict == True and passport_validator(passport):
+                    print(count)
+                    count += 1
+                elif strict == None:
                     count += 1
                               
         else:
-            # TODO check each credentials validity 
-            if passport_validator(passport):
-                    count += 1
+            if strict == True and passport_validator(passport):
+                count += 1
+            elif strict == None:
+                count += 1
                   
     
     return count
@@ -120,9 +123,12 @@ def count_legit_passports(list_of_dictionaries):
 def main():
     # print("hello world")
     data = read_file()
+    strict = True
     list_of_dictionaries = make_list_of_dictionaries(data)
-    count = count_legit_passports(list_of_dictionaries)
-    print(f"Number of valid passports part 2: {count}")
+    loose_count = count_legit_passports(list_of_dictionaries)
+    strict_count = count_legit_passports(list_of_dictionaries, strict)
+    print(f"Number of valid passports part 1: {loose_count}")
+    print(f"Number of valid passports part 2: {strict_count}")
     
 
 
