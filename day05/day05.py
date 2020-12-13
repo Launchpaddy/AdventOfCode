@@ -9,7 +9,7 @@ def read_data():
     return data
 
 
-def find_rows_and_columns(data):
+def separate_rows_and_columns(data):
     row_col_list = []
     
     for seat in data:
@@ -60,22 +60,31 @@ def base_ten_row_col(row_col_bi_list):
     return row_col_base_ten_list
 
 
-def create_ordered_list(unordered_list):
-    ordered_list = unordered_list.sort()
-    # print(ordered_list)
-    return ordered_list
+def find_missing_id(list_ids):
+    
+    previous_number = 0
+    for number in list_ids:
 
-def largest_seat_id(row_col_base_ten_list):
+        if previous_number + 1 != number and previous_number != 0:
+            return previous_number + 1
+        else: 
+            previous_number = number
+    return 0
+
+
+def create_id(seating):
+    list_of_ids = []
+    for seat in seating:
+        list_of_ids.append((seat[0] * 8) + seat[1])
+    return list_of_ids
+
+
+def largest_seat_id(id_list):
     largest_product = 0
-    id_list = []
-    for seat in row_col_base_ten_list:
-        id_list.append((seat[0] * 8) + seat[1])
-        if largest_product < (seat[0] * 8) + seat[1]:
-            largest_product = (seat[0] * 8) + seat[1]
+    for id in id_list:
+        if largest_product < id:
+            largest_product = id
 
-    id_list.sort()
-    print(id_list)
-    # print(create_ordered_list(id_list))
     return largest_product
 
 
@@ -83,10 +92,13 @@ def largest_seat_id(row_col_base_ten_list):
 # 128 rows 8 columns (0-127, 0-7)
 def main():
     data = read_data()
-    row_col_bi_list = find_rows_and_columns(data)
+    row_col_bi_list = separate_rows_and_columns(data)
     row_col_base_ten_list = base_ten_row_col(row_col_bi_list)
-    print(largest_seat_id(row_col_base_ten_list))
-    # number with 128 and 8 == 806 
+    list_of_ids = create_id(row_col_base_ten_list)
+    list_of_ids.sort()
+    print(f"Largest ID number: {largest_seat_id(list_of_ids)}")
+    print(f"Missing Seat ID #mySeat: {find_missing_id(list_of_ids)}")
+    
 
 
 if __name__ == "__main__":
